@@ -8,7 +8,7 @@ function setup() {
   background(0);
   angularVelocitySlider = createSlider(0.005, PI, 0.01, 0.001);
   fill(255);
-  text("Angular Velocity", windowWidth * 0.75 - windowWidth * 0.075, 20);
+  text("Angular Velocity", windowWidth * 0.75 - 40, 20);
   noFill();
   angularVelocitySlider.position(windowWidth * 0.75, 20);
   angularVelocitySlider.style("width", "80px");
