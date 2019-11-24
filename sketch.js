@@ -1,32 +1,41 @@
 let ball;
+// let velocity = 10;
+// let angularVel = 1;
 let angularVelocitySlider;
-let forceCheck;
+// let forceCheck = false;
+
+let params = {
+  "Velocity (m/s)": 10,
+  "Angular Velocity (r/s)": 1,
+  "Magnus Force": false,
+  "Gravity Force": false
+};
+
+let gui;
+const BG = 255;
+const TEXT = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  let velocity = 10;
+
+  let angularVel = 1;
+
+  let forceCheck = false;
+
+  gui = createGui("Magnus Explorer");
+  sliderRange(0.1, 100, 0.1);
+  gui.setPosition(50, 50);
+  gui.addObject(params);
   ball = new Ball(windowWidth / 2, windowHeight / 2, 125);
-  textSize(15);
-  background(0);
-  angularVelocitySlider = createSlider(0.005, PI, 0.01, 0.001);
-  fill(255);
-  text("Angular Velocity", windowWidth * 0.75 - 40, 20);
-  noFill();
-  angularVelocitySlider.position(windowWidth * 0.75, 20);
-  angularVelocitySlider.style("width", "80px");
-  forceCheck = createCheckbox("Show Force", false);
-  forceCheck.position(windowWidth * 0.75, 40);
-  forceCheck.style("color", "#DDD");
-  forceCheck.changed(() => background(0));
-  stroke(255);
 }
-let mag = 0.001;
+
 function draw() {
-  mag += 0.01;
-  ball.setMagnitude(mag);
-  ball.setAngularVelocity(angularVelocitySlider.value());
-
+  background(BG);
   ball.spin();
+  params["Magnus Force"] ? ball.showForce() : null;
+  params["Gravity Force"] ? ball.showForce(-9.8) : null;
 
-  if (forceCheck.checked()) {
-    ball.showForce();
-  }
+  ball.setVelocity(params["Velocity (m/s)"]);
+  ball.updateMagnus();
+  ball.setAngularVelocity(params["Angular Velocity (r/s)"]);
 }
