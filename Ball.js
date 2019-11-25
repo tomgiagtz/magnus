@@ -49,14 +49,14 @@ class Ball {
     arc(this.x, this.y, this.r, this.r, 0, PI);
   }
 
-  showForce(f = this.mag) {
+  showForce(f = this.mag, c = color(255, 0, 0)) {
     const up = f >= 0 ? 1 : -1;
     const width = (f * sqrt(10)) / 2;
 
     beginShape();
     noStroke(255);
     strokeWeight(1.1);
-    fill(237, 34, 93);
+    fill(c);
     //origin
     vertex(this.x, this.y);
     //bottom left of rect

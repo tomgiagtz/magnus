@@ -33,7 +33,7 @@ function draw() {
   background(BG);
   ball.spin();
   params["Magnus Force"] ? ball.showForce() : null;
-  params["Gravity Force"] ? ball.showForce(-9.8) : null;
+  params["Gravity Force"] ? ball.showForce(-9.8, color(0, 0, 255)) : null;
 
   ball.setVelocity(params["Velocity (m/s)"]);
   ball.updateMagnus();
